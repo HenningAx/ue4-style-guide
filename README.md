@@ -3,75 +3,36 @@
 *A mostly reasonable approach to Unreal Engine 4*
 
 Heavily inspired by the [Airbnb Javascript Style Guide](https://github.com/airbnb/javascript).
+Mostly taken from http://ue4.style by Michael Allar all credits to him.
 
 [![Analytics](https://ga-beacon.appspot.com/UA-80567399-1/repo?useReferrer)](#) ![#](https://img.shields.io/badge/lint-partial_support-yellow.svg)
 
 
-## Linking To This Document
+## These are common rules for naming any asset, folder or any content for export and in the engine
 
-Every section of this style guide is numbered for both easy reference and easy linking. You can link to any section directly by simply append a hash tag and the section number to the end of http://ue4.style
-For example, if you want to send someone to the first principle of this style guide you would append `#0.1`, resulting in http://ue4.style#0.1.
+#### 0.1 Always Use PascalCase[<sup>*</sup>](#terms-cases) ![#](https://img.shields.io/badge/lint-supported-green.svg)
 
-## Important Terminology
+PascalCase refers to starting a name with a capital letter and then instead of using spaces, every following word also starts with a capital letter. For example, `DesertEagle`, `RocketPistol`, and `ASeriesOfWords`.
 
-<a name="terms-level-map"></a>
-##### Levels/Maps
+#### 0.2 Never Use Spaces ![#](https://img.shields.io/badge/lint-supported-green.svg)
 
-The word 'map' generally refers to what the average person calls a 'level' and may be used interchangeably. See this term's history [here](https://en.wikipedia.org/wiki/Level_(video_gaming)).
+Re-enforcing Never use spaces. Spaces can cause various engineering tools and batch processes to fail. Ideally your project's root also contains no spaces and is located somewhere such as `D:\Project` instead of `C:\Users\My Name\My Documents\Unreal Projects`.
 
-<a name="terms-cases"></a>
-##### Cases
+#### 0.3 Never Use Unicode Characters And Other Symbols ![#](https://img.shields.io/badge/lint-supported-green.svg)
 
-There are a few different ways you can name things. Here are some common casing types:
+If one of your game characters is named 'Zoë', its folder name should be `Zoe`. Unicode characters can be worse than Spaces for engineering tool and some parts of UE4 don't support Unicode characters in paths either.
 
-> ###### PascalCase
->
-> Capitalize every word and remove all spaces, e.g. `DesertEagle`, `StyleGuide`, `ASeriesOfWords`.
-> 
-> ###### camelCase
->
-> The first letter is always lowercase but every following word starts with uppercase, e.g. `desertEagle`, `styleGuide`, `aSeriesOfWords`.
->
-> ###### Snake_case
->
-> Words can arbitrarily start upper or lowercase but words are separated by an underscore, e.g. `desert_Eagle`, `Style_Guide`, `a_Series_of_Words`.
+Related to this, if your project has [unexplained issues](https://answers.unrealengine.com/questions/101207/undefined.html) and your computer's user name has a Unicode character (i.e. your name is `Zoë`), any project located in your `My Documents` folder will suffer from this issue. Often simply moving your project to something like `D:\Project` will fix these mysterious issues.
 
+Using other characters outside `a-z`, `A-Z`, and `0-9` such as `@`, `-`, `_`, `,`, `*`, and `#` can also lead to unexpected and hard to track issues on other platforms, source control, and weaker engineering tools. 
 
-<a name="0"></a>
-## 0. Principles
+#### 0.4 When exporting give the asset the name it should have after importing if possible
 
-These principles have been adapted from [idomatic.js style guide](https://github.com/rwaldron/idiomatic.js/).
+If you export any file from an application to import it into UE4 try to use the name it should have after importing.
 
-<a name="0.1"></a>
-### 0.1 If your UE4 project already has a style guide, you should follow it.
+For example: if you export a model of a statue from your 3D application name it `STM_Statue_01`
 
-If you are working on a project or with a team that has a pre-existing style guide, it should be respected.  Any inconsistency between and existing style guide and this guide should defer to the existing.
-
-Style guides should be living documents however and you should propose style guide changes to an existing style guide as well as this guide if you feel the change benefits all usages.
-
-> #### "Arguments over style are pointless. There should be a style guide, and you should follow it."
-> [_Rebecca Murphey_](https://rmurphey.com)
-
-<a name="0.2"></a>
-### 0.2 All structure, assets, and code in any Unreal Engine 4 project should look like a single person created it, no matter how many people contributed.
-
-Moving from one project to another should not cause a re-learning of style and structure. Conforming to a style guide removes unneeded guesswork and ambiguities.
-
-It also allows for more productive creation and maintenance as one does not need to think about style, simply follow instructions. This style guide is written with best practices in mind, meaning that by following this style guide you will also minimize hard to track issues.
-
-<a name="0.3"></a>
-### 0.3 Friends do not let friends have bad style.
-
-If you see someone working either against a style guide or no style guide, try to correct them.
-
-When working within a team or discussing within a community such as [Unreal Slackers](http://join.unrealslackers.org/), it is far easier to help and to ask for help when people are consistent. Nobody likes to help untangle someone's Blueprint spaghetti or deal with assets with names they can't understand.
-
-If you are helping someone who's work conforms to a different but consistent and sane style guide, you should be able to adapt to it. If they do not conform to any style guide, please direct them here.
-
-<a name="0.4"></a>
-### 0.4 A team without a style guide is no team of mine.
-
-When joining an Unreal Engine 4 team one of your first questions should be "Do you have a style guide?". If the answer is no, you should be skeptical about their ability to work as a team.
+If you have a single export file which contains multiple assets after importing try to name it to the most important asset.
 
 <a name="toc"></a>
 ## Table of Contents
@@ -113,21 +74,21 @@ Depending on how your asset variants are made, you can chain together variant na
 
 | Asset Type              | Asset Name                                                 |
 | ----------------------- | ---------------------------------------------------------- |
-| Skeletal Mesh           | SK_Bob                                                     |
-| Material                | M_Bob                                                      |
-| Texture (Diffuse/Albedo)| T_Bob_D                                                    |
-| Texture (Normal)        | T_Bob_N                                                    |
-| Texture (Evil Diffuse)  | T_Bob_Evil_D                                               |
+| Skeletal Mesh           | SKM_Bob                                                    |
+| Material                | MTL_Bob                                                    |
+| Texture (Diffuse/Albedo)| TEX_Bob_D                                                  |
+| Texture (Normal)        | TEX_Bob_N                                                  |
+| Texture (Evil Diffuse)  | TEX_Bob_Evil_D                                             |
 
 ##### 1.1e2 Rocks
 
 | Asset Type              | Asset Name                                                 |
 | ----------------------- | ---------------------------------------------------------- |
-| Static Mesh (01)        | S_Rock_01                                                  |
-| Static Mesh (02)        | S_Rock_02                                                  |
-| Static Mesh (03)        | S_Rock_03                                                  |
-| Material                | M_Rock                                                     |
-| Material Instance (Snow)| MI_Rock_Snow                                               |
+| Static Mesh (01)        | STM_Rock_01                                                |
+| Static Mesh (02)        | STM_Rock_02                                                |
+| Static Mesh (03)        | STM_Rock_03                                                |
+| Material                | MTL_Rock                                                   |
+| Material Instance (Snow)| MTL_Rock_Snow_INS                                          |
 
 ### 1.2 Asset Name Modifiers ![#](https://img.shields.io/badge/lint-supported-green.svg)
 
@@ -170,12 +131,12 @@ When naming an asset use these tables to determine the prefix and suffix to use 
 | Level (Geometry)        |            | _Geo       |                                  |
 | Level (Gameplay)        |            | _Gameplay  |                                  |
 | Blueprint               | BP_        |            |                                  |
-| Material                | M_         |            |                                  |
-| Static Mesh             | S_ or SM_  |            | Pick only one. Prefer S_.        |
-| Skeletal Mesh           | SK_        |            |                                  |
-| Texture                 | T_         | _?         | See [Textures](#anc-textures)    |
-| Particle System         | PS_        |            |                                  |
-| Widget Blueprint        | WB_ or WBP_|            | Pick only one. Prefer WB_.       |
+| Material                | MTL_       |            |                                  |
+| Static Mesh             | STM_       |            |                                  |
+| Skeletal Mesh           | SKM_       |            |                                  |
+| Texture                 | TEX_       | _?         | See [Textures](#anc-textures)    |
+| Particle System         | PSM_       |            |                                  |
+| Widget Blueprint        | WBP_       |            |                                  |
 
 <a name="anc-animations"></a>
 <a name="1.2.2"></a>
@@ -183,20 +144,20 @@ When naming an asset use these tables to determine the prefix and suffix to use 
 
 | Asset Type              | Prefix     | Suffix     | Notes                            |
 | ----------------------- | ---------- | ---------- | -------------------------------- |
-| Aim Offset              | AO_        |            |                                  |
-| Aim Offset 1D           | AO_        |            |                                  |
+| Aim Offset              | AMO_       |            |                                  |
+| Aim Offset 1D           | AMO_       |            |                                  |
 | Animation Blueprint     | ABP_       |            |                                  |
-| Animation Composite     | AC_        |            |                                  |
-| Animation Montage       | AM_        |            |                                  |
-| Animation Sequence      | A_ or AS_  |            | Pick only one. Prefer A_.        |
-| Blend Space             | BS_        |            |                                  |
-| Blend Space 1D          | BS_        |            |                                  |
-| Level Sequence          | LS_        |            |                                  |
-| Morph Target            | MT_        |            |                                  |
+| Animation Composite     | AMC_       |            |                                  |
+| Animation Montage       | AMM_       |            |                                  |
+| Animation Sequence      | AMS_       |            |                                  |
+| Blend Space             | ABS_       |            |                                  |
+| Blend Space 1D          | ABS_       |            |                                  |
+| Level Sequence          | LSQ_       |            |                                  |
+| Morph Target            | MTA_       |            |                                  |
 | Paper Flipbook          | PFB_       |            |                                  |
-| Rig                     | Rig_       |            |                                  |
-| Skeletal Mesh           | SK_        |            |                                  |
-| Skeleton                | SKEL_      |            |                                  |
+| Rig                     | RIG_       |            |                                  |
+| Skeletal Mesh           | SKM_       |            |                                  |
+| Skeleton                | SKL_       |            |                                  |
 
 <a name="anc-ai"></a>
 <a name="1.2.3"></a>
@@ -205,11 +166,11 @@ When naming an asset use these tables to determine the prefix and suffix to use 
 | Asset Type              | Prefix     | Suffix     | Notes                            |
 | ----------------------- | ---------- | ---------- | -------------------------------- |
 | AI Controller           | AIC_       |            |                                  |
-| Behavior Tree           | BT_        |            |                                  |
-| Blackboard              | BB_        |            |                                  |
-| Decorator               | BTDecorator_ |          |                                  |
-| Service                 | BTService_ |            |                                  |
-| Task                    | BTTask_    |            |                                  |
+| Behavior Tree           | BHT_       |            |                                  |
+| Blackboard              | BBO_       |            |                                  |
+| Decorator               | BTD        |            |                                  |
+| Service                 | BTS_       |            |                                  |
+| Task                    | BTT_       |            |                                  |
 
 <a name="anc-bp"></a>
 <a name="1.2.4"></a>
@@ -223,7 +184,7 @@ When naming an asset use these tables to determine the prefix and suffix to use 
 | Blueprint Macro Library | BPML_      |            | Do not use macro libraries if possible. |
 | Enumeration             | E          |            | No underscore.                   |
 | Structure               | F or S     |            | No underscore.                   |
-| Widget Blueprint        | WB_ or WBP_|            | Pick only one. Prefer WB_.       |
+| Widget Blueprint        | WBP_       |            |                                  |
 
 <a name="anc-materials"></a>
 <a name="1.2.5"></a>
@@ -231,13 +192,13 @@ When naming an asset use these tables to determine the prefix and suffix to use 
 
 | Asset Type              | Prefix     | Suffix     | Notes                            |
 | ----------------------- | ---------- | ---------- | -------------------------------- |
-| Material                | M_         |            |                                  |
-| Material (Post Process) | PP_        |            |                                  |
-| Material Function       | MF_        |            |                                  |
-| Material Instance       | MI_        |            |                                  |
+| Material                | MTL_       |            |                                  |
+| Material (Post Process) | MPP_       |            |                                  |
+| Material Function       | MTF_       |            |                                  |
+| Material Instance       | MTL_       |_INS        |                                  |
 | Material Parameter Collection | MPC_ |            |                                  |
-| Subsurface Profile      | SP_ or SSP_|            | Pick only one. Prefer SP_.       |
-| Physical Materials      | PM_        |            |                                  |
+| Subsurface Profile      | SSP_       |            |                                  |
+| Physical Materials      | PML_       |            |                                  |
 
 <a name="anc-textures"></a>
 <a name="1.2.6"></a>
@@ -245,22 +206,23 @@ When naming an asset use these tables to determine the prefix and suffix to use 
 
 | Asset Type              | Prefix     | Suffix     | Notes                            |
 | ----------------------- | ---------- | ---------- | -------------------------------- |
-| Texture                 | T_         |            |                                  |
-| Texture (Diffuse/Albedo/Base Color)| T_ | _D      |                                  |
-| Texture (Normal)        | T_         | _N         |                                  |
-| Texture (Roughness)     | T_         | _R         |                                  |
-| Texture (Alpha/Opacity) | T_         | _A         |                                  |
-| Texture (Ambient Occlusion) | T_     | _O or _AO  | Pick only one. Prefer _O.        |
-| Texture (Bump)          | T_         | _B         |                                  |
-| Texture (Emissive)      | T_         | _E         |                                  |
-| Texture (Mask)          | T_         | _M         |                                  |
-| Texture (Specular)      | T_         | _S         |                                  |
-| Texture (Packed)        | T_         | _*         | See notes below about [packing](#anc-textures-packing). |
-| Texture Cube            | TC_        |            |                                  |
-| Media Texture           | MT_        |            |                                  |
-| Render Target           | RT_ or RTT_|            | Pick only one. Prefer RT_.       |
+| Texture                 | TEX_       |            |                                  |
+| Texture (Diffuse)       | TEX_       | _D         |                                  |
+| Texture (Normal)        | TEX_       | _N         |                                  |
+| Texture (Roughness)     | TEX_       | _R         |                                  |
+| Texture (Alpha/Opacity) | TEX_       | _A         |                                  |
+| Texture (Ambient Occlusion) | TEX_   | _AO        |                                  |
+| Texture (Bump)          | TEX_       | _B         |                                  |
+| Texture (Emissive)      | TEX_       | _E         |                                  |
+| Texture (Metal)         | TEX_       | _M         |                                  |
+| Texture (Mask)          | TEX_       | _K         |                                  |
+| Texture (Specular)      | TEX_       | _S         |                                  |
+| Texture (Packed)        | TEX_       | _*         | See notes below about [packing](#anc-textures-packing). |
+| Texture Cube            | TCX_       |            |                                  |
+| Media Texture           | MTX_       |            |                                  |
+| Render Target           | RTT_       |            |                                  |
 | Cube Render Target      | RTC_       |            |                                  |
-| Texture Light Profile   | TLP        |            |                                  |
+| Texture Light Profile   | TLP_       |            |                                  |
 
 <a name="anc-textures-packing"</a>
 <a name="1.2.6.1"></a>
@@ -278,11 +240,11 @@ Packing 4 channels of data into a texture (RGBA) is not recommended except for a
 | Asset Type              | Prefix     | Suffix     | Notes                            |
 | ----------------------- | ---------- | ---------- | -------------------------------- |
 | Animated Vector Field   | VFA_       |            |                                  |
-| Camera Anim             | CA_        |            |                                  |
+| Camera Anim             | CAM_       |            |                                  |
 | Color Curve             | Curve_     | _Color     |                                  |
 | Curve Table             | Curve_     | _Table     |                                  |
 | Data Asset              | *_         |            | Prefix should be based on class. |
-| Data Table              | DT_        |            |                                  |
+| Data Table              | DAT_       |            |                                  |
 | Float Curve             | Curve_     | _Float     |                                  |
 | Foliage Type            | FT_        |            |                                  |
 | Force Feedback Effect   | FFE_       |            |                                  |
@@ -315,7 +277,7 @@ Packing 4 channels of data into a texture (RGBA) is not recommended except for a
 
 | Asset Type              | Prefix     | Suffix     | Notes                            |
 | ----------------------- | ---------- | ---------- | -------------------------------- |
-| Physical Material       | PM_        |            |                                  |
+| Physical Material       | PML_       |            |                                  |
 
 <a name="anc-sounds"></a>
 <a name="1.2.10"></a>
@@ -351,8 +313,8 @@ Packing 4 channels of data into a texture (RGBA) is not recommended except for a
 
 | Asset Type              | Prefix     | Suffix     | Notes                            |
 | ----------------------- | ---------- | ---------- | -------------------------------- |
-| Particle System         | PS_        |            |                                  |
-| Material (Post Process) | PP_        |            |                                  |
+| Particle System         | PSM_       |            |                                  |
+| Material (Post Process) | MPP_       |            |                                  |
 
 <a name="2"></a>
 <a name="structure"></a>
@@ -363,6 +325,9 @@ Equally important as asset names, the directory structure style of a project sho
 There are multiple ways to lay out the content of a UE4 project. In this style, we will be using a structure that relies more on filtering and search abilities of the Content Browser for those working with assets to find assets of a specific type instead of another common structure that groups asset types with folders.
 
 > If you are using the prefix [naming convention](#1.2) above, using folders to contain assets of similar types such as `Meshes`, `Textures`, and `Materials` is a redundant practice as asset types are already both sorted by prefix as well as able to be filtered in the content browser.
+
+As an exception assets should be grouped in a folder of their type if they are used multiple times across several assets. 
+Example: Textures for the environment used by multiple assets should be in a folder Environment->Textures->(GroupTypeIfNeeded)
 
 <a name="2e1"><a>
 ### 2e1 Example Project Content Structure
@@ -449,8 +414,6 @@ These are common rules for naming any folder in the content structure.
 #### 2.1.1 Always Use PascalCase[<sup>*</sup>](#terms-cases) ![#](https://img.shields.io/badge/lint-supported-green.svg)
 
 PascalCase refers to starting a name with a capital letter and then instead of using spaces, every following word also starts with a capital letter. For example, `DesertEagle`, `RocketPistol`, and `ASeriesOfWords`.
-
-See [Cases](#terms-cases).
 
 <a name="2.1.2"></a>
 #### 2.1.2 Never Use Spaces ![#](https://img.shields.io/badge/lint-supported-green.svg)
@@ -889,7 +852,7 @@ Copyright (c) 2016 Gamemakin LLC
 
 See [LICENSE](/LICENSE)
 
-**[⬆ Back to Top](#table-of-contents)**
+**[? Back to Top](#table-of-contents)**
 
 
 ## Amendments
